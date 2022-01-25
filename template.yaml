@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  conta-criada-notificacao
+
+  Sample SAM Template for conta-criada-notificacao
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  ContaCriadaNotificacao:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: app/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Architectures:
+        - x86_64
+      Events:
+        ContaCriadaEvent:
+          Type: SNS
+          Properties:
+             Topic: arn:aws:sns:us-east-1:123456789012:my_topic
+
